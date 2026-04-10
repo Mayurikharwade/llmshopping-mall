@@ -20,7 +20,7 @@ const InstagramGallery = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="py-16 md:py-24" ref={ref}>
+    <section id="gallery" className="py-16 md:py-24 scroll-mt-20" ref={ref}>
       <div className="container">
         <div className={`text-center mb-12 ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
           <p className="text-primary text-sm uppercase tracking-widest font-medium mb-2">Follow Our Journey</p>

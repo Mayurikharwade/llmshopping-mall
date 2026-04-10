@@ -13,7 +13,7 @@ const BestOfSeason = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="py-16 md:py-24" ref={ref}>
+    <section id="best-of-season" className="py-16 md:py-24 scroll-mt-20" ref={ref}>
       <div className="container">
         <h2 className={`text-3xl md:text-4xl font-heading text-center mb-12 ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
           Best of the Season
