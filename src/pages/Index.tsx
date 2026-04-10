@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import BestOfSeason from "@/components/BestOfSeason";
+import ProductGrid from "@/components/ProductGrid";
 import ShopByCategory from "@/components/ShopByCategory";
 import FeaturedBanner from "@/components/FeaturedBanner";
 import CustomerReviews from "@/components/CustomerReviews";
@@ -11,6 +12,7 @@ const Index = () => (
     <Navbar />
     <HeroSection />
     <BestOfSeason />
+    <ProductGrid />
     <ShopByCategory />
     <FeaturedBanner />
     <CustomerReviews />
