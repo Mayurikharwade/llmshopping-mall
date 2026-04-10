@@ -5,6 +5,7 @@ import ProductGrid from "@/components/ProductGrid";
 import ShopByCategory from "@/components/ShopByCategory";
 import FeaturedBanner from "@/components/FeaturedBanner";
 import CustomerReviews from "@/components/CustomerReviews";
+import InstagramGallery from "@/components/InstagramGallery";
 import Footer from "@/components/Footer";
 
 const Index = () => (
@@ -16,6 +17,7 @@ const Index = () => (
     <ShopByCategory />
     <FeaturedBanner />
     <CustomerReviews />
+    <InstagramGallery />
     <Footer />
   </div>
 );
