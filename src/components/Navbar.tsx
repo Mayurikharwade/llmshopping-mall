@@ -1,7 +1,18 @@
 import { useState } from "react";
 import { Search, User, Heart, ShoppingBag, Menu, X, Phone, Mail } from "lucide-react";
 
-const navLinks = ["Sarees", "Fabrics", "Suits", "Dupattas", "Blouses", "Kurtas", "New Arrivals"];
+const navLinks = [
+  { label: "Sarees", section: "best-of-season" },
+  { label: "Products", section: "products" },
+  { label: "Categories", section: "categories" },
+  { label: "Featured", section: "featured" },
+  { label: "Reviews", section: "reviews" },
+  { label: "Gallery", section: "gallery" },
+];
+
+const scrollTo = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+};
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -22,17 +33,23 @@ const Navbar = () => {
       {/* Main nav */}
       <nav className="bg-card shadow-sm sticky top-0 z-50">
         <div className="container flex items-center justify-between py-4">
-          <h1 className="text-2xl md:text-3xl font-heading font-bold text-foreground tracking-tight">
+          <h1
+            className="text-2xl md:text-3xl font-heading font-bold text-foreground tracking-tight cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
             LLM <span className="text-primary">Shop</span>
           </h1>
 
           {/* Desktop links */}
           <ul className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
-              <li key={link}>
-                <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all hover:after:w-full">
-                  {link}
-                </a>
+              <li key={link.label}>
+                <button
+                  onClick={() => scrollTo(link.section)}
+                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all hover:after:w-full"
+                >
+                  {link.label}
+                </button>
               </li>
             ))}
           </ul>
@@ -57,8 +74,13 @@ const Navbar = () => {
           <div className="lg:hidden bg-card border-t animate-fade-in">
             <ul className="flex flex-col py-4 px-6 gap-3">
               {navLinks.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary py-2 block">{link}</a>
+                <li key={link.label}>
+                  <button
+                    onClick={() => { scrollTo(link.section); setMobileOpen(false); }}
+                    className="text-sm font-medium text-muted-foreground hover:text-primary py-2 block w-full text-left"
+                  >
+                    {link.label}
+                  </button>
                 </li>
               ))}
             </ul>
