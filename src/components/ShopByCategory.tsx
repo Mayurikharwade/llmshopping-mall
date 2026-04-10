@@ -12,7 +12,7 @@ const ShopByCategory = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="py-16 bg-card" ref={ref}>
+    <section id="categories" className="py-16 bg-card scroll-mt-20" ref={ref}>
       <div className="container">
         <h2 className={`text-3xl md:text-4xl font-heading text-center mb-12 ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
           Shop by Categories

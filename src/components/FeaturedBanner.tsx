@@ -6,7 +6,7 @@ const FeaturedBanner = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="py-16 md:py-24" ref={ref}>
+    <section id="featured" className="py-16 md:py-24 scroll-mt-20" ref={ref}>
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-auto md:h-[500px]">
           <div className={`relative overflow-hidden rounded-lg cursor-pointer group ${isVisible ? "animate-slide-left" : "opacity-0"}`}>
