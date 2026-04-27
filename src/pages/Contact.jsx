@@ -199,7 +199,7 @@ const Contact = () => {
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-primary mt-0.5" />
                   <div>
-                    <h4 className="font-semibold text-stone-800">LLM Showroom</h4>
+                    <h4 className="font-semibold text-stone-800">LM Showroom</h4>
                     <p className="text-sm text-stone-500 leading-relaxed">
                       By Line Of Kapu Street, Gaddamvari Street,<br />
                       Nellore, Andhra Pradesh 524001
@@ -483,8 +483,8 @@ const Contact = () => {
       {/* ======================================================= */}
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="text-primary text-sm uppercase tracking-[0.3em] font-medium">Why Choose LLM Showroom</span>
-          <h3 className="font-heading text-2xl md:text-3xl text-stone-800 mt-2 mb-8">The LLM Experience</h3>
+          <span className="text-primary text-sm uppercase tracking-[0.3em] font-medium">Why Choose LM Showroom</span>
+          <h3 className="font-heading text-2xl md:text-3xl text-stone-800 mt-2 mb-8">The LM Experience</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[

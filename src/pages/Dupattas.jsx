@@ -13,7 +13,7 @@ const dupattaProducts = [
   { id: 403, brand: "HERE&NOW", name: "Silk Blend Zari Dupatta", price: 1097, oldPrice: 3393, category: "Silk", color: "Blue", discount: 68, rating: 4.1, reviews: 145, fabric: "Silk Blend", occasion: "Festival", stockLeft: 3, image: "https://i.pinimg.com/1200x/58/a5/1f/58a51fb90a137ec65e7637d5717456f7.jpg" },
   { id: 404, brand: "Anouk Rustic", name: "Mirror Work Net Dupatta", price: 829, oldPrice: 4999, category: "Embroidered", color: "White", discount: 83, rating: 3.8, reviews: 89, fabric: "Net", occasion: "Wedding", stockLeft: 6, image: "https://i.pinimg.com/1200x/64/af/dd/64afddedc7c21a11cc074b26ba82d840.jpg" },
   { id: 405, brand: "KALINI", name: "Premium Cotton Silk Dupatta", price: 1750, oldPrice: 2500, category: "Cotton Silk", color: "Green", discount: 30, rating: 4.6, reviews: 422, fabric: "Cotton Silk", occasion: "Casual", stockLeft: 12, image: "https://i.pinimg.com/1200x/b1/02/66/b102660847d9f5d9e5afffe7954b9ca9.jpg" },
-  { id: 406, brand: "Mitera", name: "Chanderi Silk Dupatta", price: 2800, oldPrice: 3800, category: "Silk", color: "Yellow", discount: 26, rating: 4.7, reviews: 515, fabric: "Chanderi Silk", occasion: "Festival", stockLeft: 4, image: "https://i.pinimg.com/736x/ab/12/cd/ab12cde9e5f1234567890abcdef.jpg" },
+  { id: 406, brand: "Mitera", name: "Chanderi Silk Dupatta", price: 2800, oldPrice: 3800, category: "Silk", color: "Yellow", discount: 26, rating: 4.7, reviews: 515, fabric: "Chanderi Silk", occasion: "Festival", stockLeft: 4, image: "https://i.pinimg.com/1200x/49/d9/e1/49d9e110af2b86db4a2a545cd1a4bc97.jpg" },
   { id: 407, brand: "Sangria", name: "Black Sequin Border Dupatta", price: 1299, oldPrice: 2999, category: "Organza", color: "Black", discount: 56, rating: 3.7, reviews: 3600, fabric: "Organza", occasion: "Party", stockLeft: 7, image: "https://i.pinimg.com/736x/3b/4c/5d/3b4c5d6e7f8g9h0i1j2k3l4m5n6o7p.jpg" },
   { id: 408, brand: "DIVASTRI", name: "Red Phulkari Heavy Dupatta", price: 1450, oldPrice: 3000, category: "Embroidered", color: "Red", discount: 51, rating: 4.4, reviews: 120, fabric: "Phulkari", occasion: "Traditional", stockLeft: 2, image: "https://i.pinimg.com/736x/4c/5d/6e/4c5d6e7f8g9h0i1j2k3l4m5n6o7p8q.jpg" },
 ];
@@ -57,12 +57,26 @@ const Dupattas = () => {
     });
   };
 
+  // ✅ FIXED: Complete filter logic with Price Range
   let filteredDupattas = dupattaProducts.filter((d) => {
     const searchMatch = searchQuery === "" || d.name.toLowerCase().includes(searchQuery.toLowerCase()) || d.brand.toLowerCase().includes(searchQuery.toLowerCase());
+    
     const categoryMatch = !selectedFilters["Category"]?.length || selectedFilters["Category"].includes(d.category);
+    
     const fabricMatch = !selectedFilters["Fabric"]?.length || selectedFilters["Fabric"].includes(d.fabric);
+    
     const occasionMatch = !selectedFilters["Occasion"]?.length || selectedFilters["Occasion"].includes(d.occasion);
-    return searchMatch && categoryMatch && fabricMatch && occasionMatch;
+    
+    // ✅ PRICE FILTER FIX - Added this
+    const priceMatch = !selectedFilters["Price Range"]?.length || selectedFilters["Price Range"].some((range) => {
+      if (range === "Under ₹1,000") return d.price < 1000;
+      if (range === "₹1,000 - ₹2,000") return d.price >= 1000 && d.price <= 2000;
+      if (range === "₹2,000 - ₹3,000") return d.price >= 2000 && d.price <= 3000;
+      if (range === "Over ₹3,000") return d.price > 3000;
+      return true;
+    });
+    
+    return searchMatch && categoryMatch && fabricMatch && occasionMatch && priceMatch;
   });
 
   if (sortBy === "Price: Low to High") filteredDupattas.sort((a, b) => a.price - b.price);

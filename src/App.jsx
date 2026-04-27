@@ -6,13 +6,14 @@ import { ShopProvider } from "./ShopContext.jsx";
 import Navbar from "./components/Navbar.jsx"; 
 import Footer from "./components/Footer.jsx"; 
 
+// 🔥 YAHAN IMPORT PATH THEEK KIYA HAI (Kyunki file bahar hai)
+import ProtectedRoute from "./ProtectedRoute.jsx"; 
+
 // --> YAHAN AAPKA NAYA VIDEO POPUP IMPORT KIYA HAI <--
 import VideoPopup from "./pages/VideoPopup.jsx"; 
-
-// 🌟 YAHAN FLOATING VIDEO WIDGET IMPORT KIYA HAI 🌟
-//import FloatingVideoWidget from "./components/FloatingVideoWidget.jsx"; 
 import FloatingVideoWidget from "./FloatingVideoWidget.jsx"; 
 
+// --> PAGES IMPORT <--
 import Index from "./pages/Index.jsx";
 import Shop from "./pages/Shop.jsx";
 import Sarees from "./pages/Sarees.jsx";
@@ -34,6 +35,7 @@ import TrackOrder from "./pages/TrackOrder.jsx";
 import Faq from "./pages/Faq.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const App = () => {
   return (
@@ -43,12 +45,11 @@ const App = () => {
         {/* 'relative' class add ki hai taaki popups aur floating buttons theek se kaam karein */}
         <div className="flex flex-col min-h-screen relative">
           
-          {/* --> NAVBAR HAR PAGE PE CONSTANT RAHEGA <-- */}
           <Navbar />
 
-          {/* --> BEECH KA DYNAMIC CONTENT <-- */}
           <main className="flex-grow">
             <Routes>
+              {/* 🟢 PUBLIC PAGES (Bina login ke koi bhi dekh sakta hai) */}
               <Route path="/" element={<Index />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="/products" element={<Shop />} />
@@ -66,22 +67,42 @@ const App = () => {
               <Route path="/account" element={<SignIn />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/cart" element={<Cart />} />
-              <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/track-order" element={<TrackOrder />} />
               <Route path="/faq" element={<Faq />} />
-              <Route path="/checkout" element={<Checkout />} />
+              
+              {/* 🔴 PROTECTED PAGES (Sirf login ke baad hi dikhenge) */}
+              <Route 
+                path="/wishlist" 
+                element={<ProtectedRoute><Wishlist /></ProtectedRoute>} 
+              />
+              <Route 
+                path="/track-order" 
+                element={<ProtectedRoute><TrackOrder /></ProtectedRoute>} 
+              />
+              <Route 
+                path="/profile" 
+                element={<ProtectedRoute><Profile /></ProtectedRoute>} 
+              />
+              <Route 
+                path="/checkout" 
+                element={<ProtectedRoute><Checkout /></ProtectedRoute>} 
+              />
+              
+              {/* 🔥 ORDER HISTORY - Redirects to Profile with tab parameter */}
+              <Route 
+                path="/orders" 
+                element={<ProtectedRoute><Profile /></ProtectedRoute>} 
+              />
+              
+              {/* ⚠️ 404 PAGE - MUST BE LAST */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
 
-          {/* --> FOOTER HAR PAGE PE CONSTANT RAHEGA <-- */}
           <Footer />
 
-          {/* 🌟 1. ROYAL VIDEO LOGIN POPUP 🌟 (Page ke upar aayega bina layout tode) */}
+          {/* 🌟 POPUPS AUR WIDGETS 🌟 */}
           <VideoPopup />
-
-          {/* 🌟 2. FLOATING VIDEO WIDGET 🌟 (Yahan pehle WhatsApp tha, ab Video aayega) */}
           <FloatingVideoWidget />
 
         </div>

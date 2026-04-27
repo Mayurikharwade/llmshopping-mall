@@ -73,7 +73,7 @@ const reviewsData = [
 // Video Testimonials
 const videoTestimonials = [
   { id: 1, name: "Ritika Kapoor", thumbnail: "https://i.pinimg.com/736x/25/09/4e/25094edff0359cada153734742efc860.jpg", duration: "2:34", title: "My Wedding Shopping Experience" },
-  { id: 2, name: "Anjali Mehta", thumbnail: "https://i.pinimg.com/736x/8e/05/35/8e0535a0e8e424c5d1be77fea1235fda.jpg", duration: "1:58", title: "Why I Love LLM Showroom" },
+  { id: 2, name: "Anjali Mehta", thumbnail: "https://i.pinimg.com/736x/8e/05/35/8e0535a0e8e424c5d1be77fea1235fda.jpg", duration: "1:58", title: "Why I Love LM Showroom" },
   { id: 3, name: "Kavita Reddy", thumbnail: "https://i.pinimg.com/736x/42/f1/60/42f160dc6b99683365363bd91e42d364.jpg", duration: "3:12", title: "Custom Stitching Experience" },
 ];
 

@@ -29,7 +29,7 @@ const VideoPopup = () => {
       title: "Timeless Elegance",
       subtitle: "Experience the royal touch of handcrafted ethnic wear",
       badge: "New Collection",
-      image: "https://i.pinimg.com/736x/1a/ce/da/1aceda1e640830ff52f4c31e499a09d8.jpg"
+      image: "https://i.pinimg.com/736x/e3/7e/e1/e37ee137d9d7ab7abb31b21519d5f208.jpg"
     },
     {
       title: "Artisanal Heritage",
@@ -249,7 +249,7 @@ const VideoPopup = () => {
 
             <div className="absolute top-6 left-6 z-20">
               <span className="font-heading text-2xl font-bold text-white tracking-wider">
-                LLM <span className="text-primary italic">Showroom</span>
+                LM <span className="text-primary italic">Showroom</span>
               </span>
             </div>
           </div>
@@ -411,7 +411,7 @@ const VideoPopup = () => {
 
             {/* Register Link */}
             <p className="text-center text-xs text-stone-500 mt-4">
-              New to LLM Showroom?{' '}
+              New to LM Showroom?{' '}
               <Link to="/register" className="text-primary hover:underline font-medium" onClick={() => setIsOpen(false)}>
                 Create an account
               </Link>

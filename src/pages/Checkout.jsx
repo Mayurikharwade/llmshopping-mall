@@ -102,7 +102,7 @@ const Checkout = () => {
   };
 
   const applyCoupon = () => {
-    if (couponCode.toUpperCase() === "LLM10") {
+    if (couponCode.toUpperCase() === "LM10") {
       setDiscount(Math.round(subtotal * 0.1));
       setCouponApplied(true);
     } else if (couponCode.toUpperCase() === "WELCOME20" && subtotal >= 1999) {
@@ -134,7 +134,7 @@ const Checkout = () => {
       localStorage.setItem("savedAddress", JSON.stringify(formData));
     }
 
-    const newOrderNumber = `LLM${Math.floor(100000 + Math.random() * 900000)}`;
+    const newOrderNumber = `LM${Math.floor(100000 + Math.random() * 900000)}`;
     setOrderNumber(newOrderNumber);
     
     // Clear cart after successful order
@@ -245,7 +245,7 @@ const Checkout = () => {
           </Link>
           
           <Link to="/" className="font-heading text-xl font-bold text-stone-800 tracking-widest">
-            LLM <span className="text-primary italic">Showroom</span>
+            LM <span className="text-primary italic">Showroom</span>
           </Link>
           
           <div className="flex items-center gap-2 text-green-600 font-medium">
@@ -675,7 +675,7 @@ const Checkout = () => {
                   </p>
                 )}
                 <p className="text-stone-400 text-[10px] mt-2">
-                  Try: LLM10 (10% off) or WELCOME20 (20% off on orders above ₹1,999)
+                  Try: LM10 (10% off) or WELCOME20 (20% off on orders above ₹1,999)
                 </p>
               </div>
 

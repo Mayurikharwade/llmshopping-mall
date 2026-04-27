@@ -46,6 +46,7 @@ const sortOptions = ["Featured", "Newest", "Price: Low to High", "Price: High to
 const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=600&fit=crop";
 
 const Sarees = () => {
+  const location = useLocation();
   const [activeFilter, setActiveFilter] = useState("All");
   const [sortBy, setSortBy] = useState("Featured");
   const [showSortDropdown, setShowSortDropdown] = useState(false);
@@ -71,17 +72,40 @@ const Sarees = () => {
     });
   };
 
+  // ✅ FIXED: Complete filter logic with Price Range
   const filteredSarees = sareeProducts.filter((saree) => {
+    // Quick Filters
     let filterMatch = true;
     if (activeFilter === "Bestseller") filterMatch = saree.badge === "Bestseller";
     if (activeFilter === "Trending") filterMatch = saree.badge === "Trending";
     if (activeFilter === "Premium") filterMatch = saree.badge === "Premium" || saree.badge === "Luxury";
     if (activeFilter === "New Arrival") filterMatch = saree.badge === "New Arrival";
     if (activeFilter === "Sale") filterMatch = saree.tag?.includes("OFF");
+    
+    // Category Filter
     const categoryMatch = !selectedFilters["Category"]?.length || selectedFilters["Category"].includes(saree.category);
+    
+    // Fabric Filter
     const fabricMatch = !selectedFilters["Fabric"]?.length || selectedFilters["Fabric"].includes(saree.fabric);
+    
+    // Occasion Filter
     const occasionMatch = !selectedFilters["Occasion"]?.length || selectedFilters["Occasion"].includes(saree.occasion);
-    return filterMatch && categoryMatch && fabricMatch && occasionMatch;
+    
+    // ✅ FIXED: Price Range Filter
+    let priceMatch = true;
+    const priceFilters = selectedFilters["Price Range"] || [];
+    
+    if (priceFilters.length > 0) {
+      priceMatch = priceFilters.some(range => {
+        if (range === "Under ₹5,000") return saree.price < 5000;
+        if (range === "₹5,000 - ₹10,000") return saree.price >= 5000 && saree.price <= 10000;
+        if (range === "₹10,000 - ₹15,000") return saree.price >= 10000 && saree.price <= 15000;
+        if (range === "Over ₹15,000") return saree.price > 15000;
+        return false;
+      });
+    }
+    
+    return filterMatch && categoryMatch && fabricMatch && occasionMatch && priceMatch;
   });
 
   const sortedSarees = [...filteredSarees].sort((a, b) => {
@@ -99,13 +123,8 @@ const Sarees = () => {
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        // Fix any existing broken images in localStorage
-        const fixed = parsed.map(p => ({
-          ...p,
-          image: p.image || FALLBACK_IMAGE
-        }));
+        const fixed = parsed.map(p => ({ ...p, image: p.image || FALLBACK_IMAGE }));
         setRecentlyViewed(fixed);
-        // Update localStorage with fixed data
         localStorage.setItem("llmshop_recently_viewed", JSON.stringify(fixed));
       } catch (e) {
         setRecentlyViewed([]);
@@ -114,6 +133,20 @@ const Sarees = () => {
     }
   }, []);
 
+  // ✅ URL parameter filter reading
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const category = params.get("category");
+
+    if (category) {
+      setExpandedSections(prev => ({ ...prev, "Category": true }));
+      setSelectedFilters(prev => ({
+        ...prev,
+        Category: [category]
+      }));
+    }
+  }, [location]);
+
   const handleAddToCart = (e, saree) => {
     e.preventDefault(); e.stopPropagation();
     addToCart(saree);
@@ -121,16 +154,19 @@ const Sarees = () => {
     setTimeout(() => setAddedToCart({ ...addedToCart, [saree.id]: false }), 2000);
   };
 
-  const clearAllFilters = () => { setActiveFilter("All"); setSelectedFilters({}); setExpandedSections({}); setActiveCategory(null); };
+  const clearAllFilters = () => { 
+    setActiveFilter("All"); 
+    setSelectedFilters({}); 
+    setExpandedSections({}); 
+    setActiveCategory(null); 
+  };
+  
   const getDiscountedPrice = (price, oldPrice) => !oldPrice ? null : Math.round(((oldPrice - price) / oldPrice) * 100);
   const handleImageError = (e) => { e.target.src = FALLBACK_IMAGE; };
   const formatNumber = (num) => num >= 1000 ? (num / 1000).toFixed(1) + 'K' : num.toString();
 
   const addToRecentlyViewed = (product) => {
-    const safeProduct = {
-      ...product,
-      image: product.image || FALLBACK_IMAGE
-    };
+    const safeProduct = { ...product, image: product.image || FALLBACK_IMAGE };
     const updated = [safeProduct, ...recentlyViewed.filter(p => p.id !== product.id)].slice(0, 8);
     setRecentlyViewed(updated);
     localStorage.setItem("llmshop_recently_viewed", JSON.stringify(updated));
@@ -247,10 +283,10 @@ const Sarees = () => {
           </div>
         </div>
         
-        {/* MAIN LAYOUT: FIXED SIDEBAR + SCROLLABLE PRODUCTS */}
+        {/* MAIN LAYOUT */}
         <div className="flex gap-6 items-start" style={{ height: 'calc(100vh - 120px)' }}>
           
-          {/* STATIC FILTER SIDEBAR - Full height, independently scrollable */}
+          {/* STATIC FILTER SIDEBAR */}
           <aside className="hidden lg:block w-[280px] flex-shrink-0 h-full">
             <div className="bg-white rounded-2xl shadow-lg border border-stone-200 h-full overflow-y-auto scrollbar-hide">
               <div className="p-5">
@@ -259,7 +295,6 @@ const Sarees = () => {
                   <button onClick={clearAllFilters} className="text-xs text-primary font-semibold hover:underline">Clear All</button>
                 </div>
 
-                {/* Active Filter Chips */}
                 {Object.values(selectedFilters).flat().length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mb-4 pb-3 border-b border-stone-100">
                     {Object.entries(selectedFilters).map(([section, values]) =>
@@ -273,7 +308,6 @@ const Sarees = () => {
                   </div>
                 )}
 
-                {/* Quick Filter Pills inside sidebar */}
                 <div className="mb-4 pb-3 border-b border-stone-100">
                   <h4 className="text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">Quick Filters</h4>
                   <div className="flex flex-wrap gap-1.5">
@@ -316,7 +350,7 @@ const Sarees = () => {
             </div>
           </aside>
 
-          {/* PRODUCT GRID - Full height, independently scrollable */}
+          {/* PRODUCT GRID */}
           <main className="flex-1 min-w-0 h-full overflow-y-auto scrollbar-hide">
             {sortedSarees.length === 0 ? (
               <div className="text-center py-16 bg-white rounded-2xl shadow-lg border border-stone-200">
@@ -365,7 +399,6 @@ const Sarees = () => {
                   })}
                 </div>
 
-                {/* 🔥 FIXED: Recently Viewed Section with image fallback */}
                 {recentlyViewed.length > 0 && (
                   <div className="mt-10 pt-6 border-t-2 border-stone-100 mb-6">
                     <div className="flex items-center justify-between mb-5">
@@ -376,14 +409,7 @@ const Sarees = () => {
                       {recentlyViewed.slice(0, 6).map((p) => (
                         <button key={p.id} onClick={() => setQuickViewProduct(p)} className="group flex-shrink-0 w-36 md:w-40 text-left">
                           <div className="aspect-[3/4] rounded-xl overflow-hidden bg-stone-100 mb-3 shadow-md group-hover:shadow-xl transition-all duration-300">
-                            <img 
-                              src={p.image || FALLBACK_IMAGE} 
-                              alt={p.name} 
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                              onError={(e) => {
-                                e.target.src = FALLBACK_IMAGE;
-                              }}
-                            />
+                            <img src={p.image || FALLBACK_IMAGE} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onError={(e) => { e.target.src = FALLBACK_IMAGE; }} />
                           </div>
                           <p className="text-xs text-stone-800 font-semibold line-clamp-1 group-hover:text-primary transition-colors">{p.name}</p>
                           <p className="text-sm font-bold text-stone-800 mt-1">₹{p.price?.toLocaleString() || '0'}</p>
@@ -405,9 +431,7 @@ const Sarees = () => {
           <div className="relative bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden" onClick={e => e.stopPropagation()}>
             <button onClick={() => setQuickViewProduct(null)} className="absolute top-4 right-4 z-50 bg-white/90 hover:bg-white p-2.5 rounded-full shadow-xl transition-all hover:scale-110"><X className="w-5 h-5" /></button>
             <div className="grid md:grid-cols-2 h-full">
-              <div className="h-[300px] md:h-[500px] bg-stone-100">
-                <img src={quickViewProduct.image || FALLBACK_IMAGE} alt={quickViewProduct.name} className="w-full h-full object-cover" onError={handleImageError} />
-              </div>
+              <div className="h-[300px] md:h-[500px] bg-stone-100"><img src={quickViewProduct.image || FALLBACK_IMAGE} alt={quickViewProduct.name} className="w-full h-full object-cover" onError={handleImageError} /></div>
               <div className="p-6 md:p-8 overflow-y-auto">
                 <span className="text-xs text-primary font-bold uppercase tracking-wider bg-primary/5 px-3 py-1 rounded-full">{quickViewProduct.fabric}</span>
                 <h2 className="font-heading text-2xl text-stone-800 mt-3 mb-3 leading-tight">{quickViewProduct.name}</h2>
@@ -443,6 +467,8 @@ const Sarees = () => {
         .scrollbar-hide::-webkit-scrollbar{display:none}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
         @keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
         .animate-slideDown{animation:slideDown 0.3s ease-out forwards}
+        .line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+        .line-clamp-1{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
       `}} />
     </div>
   );

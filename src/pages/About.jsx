@@ -88,7 +88,7 @@ const About = () => {
       image: "https://i.pinimg.com/736x/8e/1f/38/8e1f38a2c226f46854a9f6921eea450c.jpg"
     },
     { 
-      text: "LLM Showroom has the finest collection of handloom fabrics. Their customer service is exceptional!", 
+      text: "LM Showroom has the finest collection of handloom fabrics. Their customer service is exceptional!", 
       name: "Priya Menon", 
       location: "Chennai",
       rating: 5,
@@ -108,7 +108,7 @@ const About = () => {
     { year: "1985", title: "Founded", desc: "Started as a small weaving unit in Nellore" },
     { year: "1995", title: "First Showroom", desc: "Opened our flagship store on Kapu Street" },
     { year: "2005", title: "Artisan Network", desc: "Partnered with 100+ rural weavers" },
-    { year: "2015", title: "Digital Presence", desc: "Launched LLM Showroom online" },
+    { year: "2015", title: "Digital Presence", desc: "Launched LM Showroom online" },
     { year: "2025", title: "Global Reach", desc: "Shipping to 20+ countries worldwide" }
   ];
 
@@ -161,86 +161,148 @@ const About = () => {
   }, []);
 
   return (
-    <div className="w-full bg-gradient-to-b from-stone-50 via-white to-stone-50 min-h-screen">
+    <div className="w-full bg-cream">
       
       {/* ======================================================= */}
-      {/* 🌟 PREMIUM HERO CAROUSEL */}
+      {/* 🌟 PREMIUM HERO SECTION - REDUCED SIZE */}
       {/* ======================================================= */}
-     
+      <section className="relative bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-full h-full" style={{ 
+            backgroundImage: 'radial-gradient(circle at 20% 30%, #fff 1px, transparent 1px)',
+            backgroundSize: '50px 50px'
+          }}></div>
+        </div>
+        <div className="absolute top-10 left-10 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-5 right-10 w-60 h-60 bg-amber-500/10 rounded-full blur-3xl"></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 py-10 md:py-12">
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-xs text-stone-400 mb-4">
+            <Link to="/" className="hover:text-primary transition-colors">Home</Link>
+            <ChevronRight className="w-3 h-3" />
+            <span className="text-primary font-semibold">About Us</span>
+          </div>
+          
+          <div className="text-center">
+            <span className="inline-flex items-center gap-2 bg-white/10 text-cream text-xs uppercase tracking-[0.3em] px-3 py-1 rounded-full border border-white/20 mb-3">
+              <Sparkles className="w-3 h-3 text-primary" /> Our Story
+            </span>
+            <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl text-white leading-tight">
+              Weaving Traditions,<br />
+              <span className="text-primary italic">Creating Heirlooms</span>
+            </h1>
+            <p className="text-cream/70 text-base max-w-2xl mx-auto mt-3">
+              Discover the legacy behind LM Showroom - where every saree tells a story of heritage, craftsmanship, and love
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* ======================================================= */}
       {/* STATS COUNTER */}
       {/* ======================================================= */}
-     
+      <section className="bg-white py-8 border-b border-stone-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="text-center">
+              <div className="flex items-center justify-center w-10 h-10 mx-auto mb-2 bg-primary/10 rounded-full">
+                <Users className="w-5 h-5 text-primary" />
+              </div>
+              <p className="text-2xl font-bold text-stone-800">{stats.customers.toLocaleString()}+</p>
+              <p className="text-xs text-stone-500">Happy Customers</p>
+            </div>
+            <div className="text-center">
+              <div className="flex items-center justify-center w-10 h-10 mx-auto mb-2 bg-primary/10 rounded-full">
+                <ShoppingBag className="w-5 h-5 text-primary" />
+              </div>
+              <p className="text-2xl font-bold text-stone-800">{stats.products.toLocaleString()}+</p>
+              <p className="text-xs text-stone-500">Products Curated</p>
+            </div>
+            <div className="text-center">
+              <div className="flex items-center justify-center w-10 h-10 mx-auto mb-2 bg-primary/10 rounded-full">
+                <Award className="w-5 h-5 text-primary" />
+              </div>
+              <p className="text-2xl font-bold text-stone-800">{stats.years}+</p>
+              <p className="text-xs text-stone-500">Years of Excellence</p>
+            </div>
+            <div className="text-center">
+              <div className="flex items-center justify-center w-10 h-10 mx-auto mb-2 bg-primary/10 rounded-full">
+                <MapPin className="w-5 h-5 text-primary" />
+              </div>
+              <p className="text-2xl font-bold text-stone-800">{stats.cities}+</p>
+              <p className="text-xs text-stone-500">Cities Served</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ======================================================= */}
       {/* OUR STORY */}
       {/* ======================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-          <div className="w-full lg:w-1/2 space-y-6">
-            <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
-              <Sparkles className="w-4 h-4 text-primary" />
+      <section className="max-w-7xl mx-auto px-4 py-12">
+        <div className="flex flex-col lg:flex-row gap-8 items-center">
+          <div className="w-full lg:w-1/2 space-y-3">
+            <div className="inline-flex items-center gap-2 bg-primary/10 px-3 py-1 rounded-full">
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
               <span className="text-xs font-bold text-primary uppercase tracking-widest">Our Story</span>
             </div>
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl text-stone-800 leading-tight">
+            <h2 className="font-heading text-2xl md:text-3xl text-stone-800 leading-tight">
               A Legacy of <br />
               <span className="text-primary italic">Timeless Elegance</span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full"></div>
-            <p className="font-body text-stone-600 leading-relaxed text-lg">
+            <div className="w-16 h-0.5 bg-gradient-to-r from-primary to-primary/50 rounded-full"></div>
+            <p className="text-stone-600 text-sm leading-relaxed">
               Nestled in the heart of Andhra Pradesh, by the line of Kapu Street in Nellore,{' '}
-              <strong className="text-stone-800">LLM Showroom</strong> stands as a beacon of 
+              <strong className="text-stone-800">LM Showroom</strong> stands as a beacon of 
               rich Indian textiles and handcrafted perfection.
             </p>
-            <p className="font-body text-stone-600 leading-relaxed">
+            <p className="text-stone-600 text-sm leading-relaxed">
               For over four decades, we have curated the finest silks, handloom cottons, and bridal sarees, 
-              ensuring that every drape tells a story of cultural richness. We believe a saree is not just 
-              a garment; it is an heirloom passed down through generations.
+              ensuring that every drape tells a story of cultural richness.
             </p>
-            <p className="font-body text-stone-600 leading-relaxed">
+            <p className="text-stone-600 text-sm leading-relaxed">
               Our commitment to quality and authenticity has made us a trusted name among discerning 
-              customers who appreciate the finer things in life. Each piece in our collection is 
-              handpicked, ensuring unique designs that you won't find anywhere else.
+              customers who appreciate the finer things in life.
             </p>
             
-            <div className="flex items-center gap-4 pt-4">
+            <div className="flex items-center gap-3 pt-2">
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-stone-200 overflow-hidden">
+                  <div key={i} className="w-7 h-7 rounded-full border-2 border-white bg-stone-200 overflow-hidden">
                     <img src={`https://i.pinimg.com/736x/${i === 1 ? '25/09/4e/25094edff0359cada153734742efc860' : i === 2 ? '8e/05/35/8e0535a0e8e424c5d1be77fea1235fda' : i === 3 ? '33/e2/04/33e20454ff3d260337ac462bba1958b3' : '5d/0c/3e/5d0c3eecd96738b38dc3a31d01b04eab'}.jpg`} alt="" className="w-full h-full object-cover" />
                   </div>
                 ))}
               </div>
               <div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-0.5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                    <Star key={i} className="w-3 h-3 fill-yellow-500 text-yellow-500" />
                   ))}
                 </div>
-                <p className="text-sm text-stone-500">Trusted by 50,000+ customers</p>
+                <p className="text-xs text-stone-500">Trusted by 50,000+ customers</p>
               </div>
             </div>
           </div>
           
           <div className="w-full lg:w-1/2">
             <div className="relative">
-              <div className="absolute -top-6 -left-6 w-32 h-32 bg-primary/10 rounded-3xl"></div>
-              <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-amber-500/10 rounded-3xl"></div>
-              <div className="relative grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="h-48 rounded-2xl overflow-hidden shadow-lg">
+              <div className="absolute -top-3 -left-3 w-20 h-20 bg-primary/10 rounded-2xl"></div>
+              <div className="absolute -bottom-3 -right-3 w-28 h-28 bg-amber-500/10 rounded-2xl"></div>
+              <div className="relative grid grid-cols-2 gap-3">
+                <div className="space-y-3">
+                  <div className="h-36 rounded-xl overflow-hidden shadow-md">
                     <img src="https://i.pinimg.com/1200x/d0/3c/66/d03c66620cf836227a25475f34b86ffb.jpg" alt="Weaving" className="w-full h-full object-cover hover:scale-105 transition duration-500" />
                   </div>
-                  <div className="h-32 rounded-2xl overflow-hidden shadow-lg">
+                  <div className="h-24 rounded-xl overflow-hidden shadow-md">
                     <img src="https://i.pinimg.com/1200x/38/59/35/385935f69920a909cc7f9a2cc99cf4f9.jpg" alt="Fabric" className="w-full h-full object-cover hover:scale-105 transition duration-500" />
                   </div>
                 </div>
-                <div className="space-y-4 pt-8">
-                  <div className="h-32 rounded-2xl overflow-hidden shadow-lg">
+                <div className="space-y-3 pt-6">
+                  <div className="h-24 rounded-xl overflow-hidden shadow-md">
                     <img src="https://i.pinimg.com/1200x/a2/a5/2e/a2a52e3d157a4ff42bc97f7603b0c64d.jpg" alt="Looms" className="w-full h-full object-cover hover:scale-105 transition duration-500" />
                   </div>
-                  <div className="h-48 rounded-2xl overflow-hidden shadow-lg">
+                  <div className="h-36 rounded-xl overflow-hidden shadow-md">
                     <img src="https://i.pinimg.com/736x/4f/0c/79/4f0c799c67e8be10b14ad150b54f53b4.jpg" alt="Silk" className="w-full h-full object-cover hover:scale-105 transition duration-500" />
                   </div>
                 </div>
@@ -251,91 +313,81 @@ const About = () => {
       </section>
 
       {/* ======================================================= */}
-      {/* MILESTONES TIMELINE */}
+      {/* OUR VALUES */}
       {/* ======================================================= */}
-      <section className="bg-stone-100 py-20">
+      <section className="bg-white py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <span className="text-primary text-sm uppercase tracking-[0.3em] font-medium">Our Journey</span>
-            <h3 className="font-heading text-3xl md:text-4xl text-stone-800 mt-2">Milestones of Excellence</h3>
+          <div className="text-center mb-8">
+            <span className="text-primary text-xs uppercase tracking-[0.3em] font-medium">What We Stand For</span>
+            <h3 className="font-heading text-2xl text-stone-800 mt-1">Our Core Values</h3>
+            <p className="text-stone-500 max-w-2xl mx-auto mt-1 text-sm">
+              The principles that guide everything we do at LM Showroom
+            </p>
           </div>
           
-          <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-primary/30"></div>
-            <div className="space-y-12">
-              {milestones.map((milestone, idx) => (
-                <div key={idx} className={`flex items-center ${idx % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-                  <div className="w-1/2 flex justify-end px-8">
-                    <div className={`${idx % 2 === 0 ? 'text-right' : 'text-left'}`}>
-                      <span className="text-4xl font-heading font-bold text-primary">{milestone.year}</span>
-                      <h4 className="text-xl font-bold text-stone-800 mt-1">{milestone.title}</h4>
-                      <p className="text-stone-600 text-sm mt-1">{milestone.desc}</p>
-                    </div>
-                  </div>
-                  <div className="relative">
-                    <div className="w-4 h-4 bg-primary rounded-full"></div>
-                  </div>
-                  <div className="w-1/2"></div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {values.map((value, idx) => (
+              <div key={idx} className="group bg-stone-50 rounded-xl p-4 text-center hover:shadow-md transition-all">
+                <div className={`w-10 h-10 mx-auto mb-2 rounded-xl bg-gradient-to-br ${value.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                  <value.icon className="w-5 h-5 text-white" />
                 </div>
-              ))}
-            </div>
+                <h4 className="font-heading text-sm font-bold text-stone-800 mb-1">{value.title}</h4>
+                <p className="text-xs text-stone-500 leading-relaxed">{value.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ======================================================= */}
-      {/* OUR VALUES */}
+      {/* MILESTONES TIMELINE */}
       {/* ======================================================= */}
-      <section className="max-w-7xl mx-auto px-4 py-20">
-        <div className="text-center mb-12">
-          <span className="text-primary text-sm uppercase tracking-[0.3em] font-medium">What We Stand For</span>
-          <h3 className="font-heading text-3xl md:text-4xl text-stone-800 mt-2">Our Core Values</h3>
-          <p className="text-stone-500 max-w-2xl mx-auto mt-3">
-            The principles that guide everything we do at LLM Showroom
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {values.map((value, idx) => (
-            <div key={idx} className="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-100 text-center">
-              <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${value.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                <value.icon className="w-8 h-8 text-white" />
+      <section className="py-12">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-8">
+            <span className="text-primary text-xs uppercase tracking-[0.3em] font-medium">Our Journey</span>
+            <h3 className="font-heading text-2xl text-stone-800 mt-1">Milestones of Excellence</h3>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+            {milestones.map((milestone, idx) => (
+              <div key={idx} className="text-center p-3 bg-stone-50 rounded-xl">
+                <span className="text-xl font-heading font-bold text-primary">{milestone.year}</span>
+                <h4 className="font-bold text-stone-800 text-sm mt-1">{milestone.title}</h4>
+                <p className="text-xs text-stone-500 mt-1">{milestone.desc}</p>
               </div>
-              <h4 className="font-heading text-lg font-bold text-stone-800 mb-2">{value.title}</h4>
-              <p className="text-sm text-stone-500">{value.desc}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ======================================================= */}
       {/* MEET THE TEAM */}
       {/* ======================================================= */}
-      <section className="bg-white py-20">
+      <section className="bg-white py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <span className="text-primary text-sm uppercase tracking-[0.3em] font-medium">The People Behind</span>
-            <h3 className="font-heading text-3xl md:text-4xl text-stone-800 mt-2">Meet Our Family</h3>
-            <p className="text-stone-500 max-w-2xl mx-auto mt-3">
+          <div className="text-center mb-8">
+            <span className="text-primary text-xs uppercase tracking-[0.3em] font-medium">The People Behind</span>
+            <h3 className="font-heading text-2xl text-stone-800 mt-1">Meet Our Family</h3>
+            <p className="text-stone-500 max-w-2xl mx-auto mt-1 text-sm">
               Passionate individuals dedicated to bringing you the finest ethnic wear
             </p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {team.map((member, idx) => (
-              <div key={idx} className="group bg-stone-50 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
-                <div className="relative h-64 overflow-hidden">
+              <div key={idx} className="bg-stone-50 rounded-xl overflow-hidden hover:shadow-md transition-all">
+                <div className="relative h-44 overflow-hidden">
                   <img 
                     src={member.image} 
                     alt={member.name} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                    className="w-full h-full object-cover hover:scale-105 transition duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
-                <div className="p-5 text-center">
-                  <h4 className="font-heading text-lg font-bold text-stone-800">{member.name}</h4>
-                  <p className="text-primary text-sm font-medium">{member.role}</p>
-                  <p className="text-xs text-stone-500 mt-1">{member.experience} experience</p>
+                <div className="p-3 text-center">
+                  <h4 className="font-heading font-bold text-stone-800 text-sm">{member.name}</h4>
+                  <p className="text-primary text-xs font-medium">{member.role}</p>
+                  <p className="text-xs text-stone-500 mt-0.5">{member.experience}</p>
                 </div>
               </div>
             ))}
@@ -346,15 +398,15 @@ const About = () => {
       {/* ======================================================= */}
       {/* TESTIMONIALS */}
       {/* ======================================================= */}
-      <section className="bg-gradient-to-r from-primary/5 via-amber-500/5 to-primary/5 py-20">
+      <section className="py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <span className="text-primary text-sm uppercase tracking-[0.3em] font-medium">Customer Love</span>
-            <h3 className="font-heading text-3xl md:text-4xl text-stone-800 mt-2">What Our Customers Say</h3>
+          <div className="text-center mb-8">
+            <span className="text-primary text-xs uppercase tracking-[0.3em] font-medium">Customer Love</span>
+            <h3 className="font-heading text-2xl text-stone-800 mt-1">What Our Customers Say</h3>
           </div>
           
-          <div className="max-w-4xl mx-auto">
-            <div className="relative min-h-[250px]">
+          <div className="max-w-3xl mx-auto">
+            <div className="relative min-h-[200px]">
               {testimonials.map((testimonial, idx) => (
                 <div 
                   key={idx}
@@ -364,25 +416,25 @@ const About = () => {
                       : 'opacity-0 translate-x-10 pointer-events-none'
                   }`}
                 >
-                  <div className="bg-white rounded-3xl shadow-xl p-8 md:p-10">
-                    <Quote className="w-12 h-12 text-primary/20 mb-4" />
-                    <p className="text-lg md:text-xl text-stone-700 italic mb-6">
+                  <div className="bg-white rounded-xl shadow-md p-5">
+                    <Quote className="w-8 h-8 text-primary/20 mb-2" />
+                    <p className="text-stone-700 italic text-sm mb-3">
                       "{testimonial.text}"
                     </p>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3">
                       <img 
                         src={testimonial.image} 
                         alt={testimonial.name} 
-                        className="w-14 h-14 rounded-full object-cover border-2 border-primary"
+                        className="w-10 h-10 rounded-full object-cover border-2 border-primary"
                       />
                       <div>
-                        <div className="flex items-center gap-1 mb-1">
+                        <div className="flex items-center gap-0.5 mb-0.5">
                           {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                            <Star key={i} className="w-3 h-3 fill-yellow-500 text-yellow-500" />
                           ))}
                         </div>
-                        <h4 className="font-heading font-bold text-stone-800">{testimonial.name}</h4>
-                        <p className="text-sm text-stone-500">{testimonial.location}</p>
+                        <h4 className="font-heading font-bold text-stone-800 text-sm">{testimonial.name}</h4>
+                        <p className="text-xs text-stone-500">{testimonial.location}</p>
                       </div>
                     </div>
                   </div>
@@ -391,13 +443,13 @@ const About = () => {
             </div>
             
             {/* Testimonial Dots */}
-            <div className="flex justify-center gap-2 mt-8">
+            <div className="flex justify-center gap-2 mt-5">
               {testimonials.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActiveTestimonial(idx)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    activeTestimonial === idx ? 'w-8 bg-primary' : 'bg-stone-300 hover:bg-stone-400'
+                  className={`w-1.5 h-1.5 rounded-full transition-all ${
+                    activeTestimonial === idx ? 'w-5 bg-primary' : 'bg-stone-300'
                   }`}
                 />
               ))}
@@ -407,65 +459,56 @@ const About = () => {
       </section>
 
       {/* ======================================================= */}
-      {/* VISIT US CTA */}
+      {/* VISIT US CTA - CLEAN WHITE SECTION */}
       {/* ======================================================= */}
-      <section className="max-w-7xl mx-auto px-4 py-20">
-        <div className="bg-gradient-to-r from-stone-900 to-stone-800 rounded-3xl p-10 md:p-16 text-center relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-full h-full" style={{ 
-              backgroundImage: 'radial-gradient(circle at 20% 30%, #fff 1px, transparent 1px)',
-              backgroundSize: '40px 40px'
-            }}></div>
+      <section className="bg-white py-12 border-t border-stone-100">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h3 className="font-heading text-2xl md:text-3xl text-stone-800 mb-2">Visit Our Flagship Store</h3>
+          <p className="text-stone-500 max-w-2xl mx-auto mb-6 text-sm">
+            Experience the beauty of handcrafted textiles in person at our Nellore showroom
+          </p>
+          
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
+            <div className="flex items-center gap-2 text-stone-600 text-sm">
+              <MapPin className="w-4 h-4 text-primary" />
+              <span>Kapu Street, Nellore, Andhra Pradesh</span>
+            </div>
+            <div className="flex items-center gap-2 text-stone-600 text-sm">
+              <Phone className="w-4 h-4 text-primary" />
+              <span>+91 98765 43210</span>
+            </div>
+            <div className="flex items-center gap-2 text-stone-600 text-sm">
+              <Clock className="w-4 h-4 text-primary" />
+              <span>Mon - Sat: 10:00 AM - 8:00 PM</span>
+            </div>
           </div>
           
-          <div className="relative z-10">
-            <h3 className="font-heading text-3xl md:text-4xl text-white mb-4">Visit Our Flagship Store</h3>
-            <p className="text-cream/80 max-w-2xl mx-auto mb-8">
-              Experience the beauty of handcrafted textiles in person at our Nellore showroom
-            </p>
-            
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-8">
-              <div className="flex items-center gap-3 text-cream">
-                <MapPin className="w-5 h-5 text-primary" />
-                <span>Kapu Street, Nellore, Andhra Pradesh</span>
-              </div>
-              <div className="flex items-center gap-3 text-cream">
-                <Phone className="w-5 h-5 text-primary" />
-                <span>+91 98765 43210</span>
-              </div>
-              <div className="flex items-center gap-3 text-cream">
-                <Clock className="w-5 h-5 text-primary" />
-                <span>Mon - Sat: 10:00 AM - 8:00 PM</span>
-              </div>
-            </div>
-            
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <Link 
-                to="/contact"
-                className="bg-primary text-white px-8 py-3.5 rounded-full font-medium hover:bg-primary/90 transition flex items-center gap-2"
-              >
-                Get Directions <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link 
-                to="/shop"
-                className="bg-white/10 backdrop-blur-sm border border-white/30 text-white px-8 py-3.5 rounded-full font-medium hover:bg-white/20 transition flex items-center gap-2"
-              >
-                Shop Online <ShoppingBag className="w-4 h-4" />
-              </Link>
-            </div>
-            
-            {/* Social Links */}
-            <div className="flex items-center justify-center gap-4 mt-8 pt-8 border-t border-white/20">
-              <a href="#" className="p-2 bg-white/10 rounded-full text-white hover:bg-primary transition">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="p-2 bg-white/10 rounded-full text-white hover:bg-primary transition">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="p-2 bg-white/10 rounded-full text-white hover:bg-primary transition">
-                <Youtube className="w-5 h-5" />
-              </a>
-            </div>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link 
+              to="/contact"
+              className="bg-primary text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-primary/90 transition flex items-center gap-2"
+            >
+              Get Directions <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+            <Link 
+              to="/shop"
+              className="bg-stone-100 border border-stone-200 text-stone-800 px-6 py-2 rounded-full text-sm font-medium hover:bg-stone-200 transition flex items-center gap-2"
+            >
+              Shop Online <ShoppingBag className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+          
+          {/* Social Links */}
+          <div className="flex items-center justify-center gap-3 mt-8 pt-6 border-t border-stone-100">
+            <a href="#" className="p-2 bg-stone-100 rounded-full text-stone-600 hover:bg-primary hover:text-white transition">
+              <Instagram className="w-4 h-4" />
+            </a>
+            <a href="#" className="p-2 bg-stone-100 rounded-full text-stone-600 hover:bg-primary hover:text-white transition">
+              <Facebook className="w-4 h-4" />
+            </a>
+            <a href="#" className="p-2 bg-stone-100 rounded-full text-stone-600 hover:bg-primary hover:text-white transition">
+              <Youtube className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </section>

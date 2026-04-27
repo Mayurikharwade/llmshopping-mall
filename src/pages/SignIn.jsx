@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { 
   ArrowRight, ArrowLeft, Mail, Lock, Eye, EyeOff, Sparkles, 
   Shield, Truck, Award, Clock, CheckCircle, AlertCircle,
   Fingerprint, Smartphone, Globe, Key, Timer, RefreshCw,
   Gift, Percent, MessageCircle
 } from "lucide-react";
+import { useShop } from "../ShopContext.jsx";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useShop();
   
   const [inputValue, setInputValue] = useState("");
   const [password, setPassword] = useState("");
@@ -52,7 +55,6 @@ const SignIn = () => {
     { icon: Gift, text: "Birthday surprise" }
   ];
 
-  // Auto-slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
@@ -60,7 +62,6 @@ const SignIn = () => {
     return () => clearInterval(interval);
   }, [heroSlides.length]);
 
-  // Restore remembered email
   useEffect(() => {
     const savedEmail = localStorage.getItem("rememberedEmail");
     if (savedEmail) {
@@ -70,7 +71,6 @@ const SignIn = () => {
     }
   }, []);
 
-  // OTP timer countdown
   useEffect(() => {
     if (timer > 0) {
       const countdown = setInterval(() => setTimer(prev => prev - 1), 1000);
@@ -135,6 +135,7 @@ const SignIn = () => {
     setSuccessMsg("");
     setIsLoading(true);
 
+    // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
 
@@ -150,8 +151,13 @@ const SignIn = () => {
           if (otpString.length === 6) {
             if (rememberMe) localStorage.setItem("rememberedEmail", inputValue);
             else localStorage.removeItem("rememberedEmail");
+            
+            const userData = { phone: inputValue, name: "User" };
+            login(userData); // ✅ Update global state
+            
             setSuccessMsg("✓ OTP Verified! Redirecting...");
-            setTimeout(() => navigate("/"), 1500);
+            // ✅ FIX: Navigate directly WITHOUT setTimeout
+            navigate("/profile", { replace: true });
           } else {
             setErrorMsg("Please enter complete 6-digit OTP");
           }
@@ -161,11 +167,19 @@ const SignIn = () => {
           const savedUser = JSON.parse(localStorage.getItem("userAuth"));
           const isValidRegisteredUser = savedUser && inputValue === savedUser.email && password === savedUser.password;
           const isTestAdmin = inputValue === "test@admin.com" && password === "123456";
+          
           if (rememberMe) localStorage.setItem("rememberedEmail", inputValue);
           else localStorage.removeItem("rememberedEmail");
+          
           if (isValidRegisteredUser || isTestAdmin) {
+            const userData = isTestAdmin 
+              ? { email: "test@admin.com", name: "Admin" }
+              : savedUser;
+            login(userData); // ✅ Update global state
+            
             setSuccessMsg("Login Successful! Redirecting...");
-            setTimeout(() => navigate("/"), 1500);
+            // ✅ FIX: Navigate directly WITHOUT setTimeout
+            navigate("/profile", { replace: true });
           } else {
             setErrorMsg("Invalid Email or Password. Please try again.");
           }
@@ -181,7 +195,6 @@ const SignIn = () => {
   return (
     <div className="w-full min-h-screen flex flex-col lg:flex-row bg-gradient-to-br from-stone-50 via-white to-stone-100">
       
-      {/* 🔥 FIXED: Mobile responsive slider - now visible on all screens */}
       <div className="w-full lg:w-1/2 relative bg-stone-900 overflow-hidden h-[250px] sm:h-[300px] lg:h-auto">
         {heroSlides.map((slide, idx) => (
           <div key={idx} className={`absolute inset-0 transition-opacity duration-1000 ${currentSlide === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}>
@@ -189,14 +202,12 @@ const SignIn = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
             <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
             
-            {/* 🔥 FIXED: Responsive padding for mobile */}
             <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-8 lg:p-16">
               <div className={`transition-all duration-700 transform ${currentSlide === idx ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                 <span className="inline-flex items-center gap-2 bg-primary/90 backdrop-blur-sm text-white text-[10px] sm:text-xs uppercase tracking-[0.3em] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-6">
                   <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3" />Welcome Back<Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                 </span>
                 
-                {/* 🔥 FIXED: Responsive text sizes */}
                 <h2 className="font-heading text-2xl sm:text-3xl lg:text-5xl text-white mb-2 sm:mb-3 leading-tight">
                   {slide.title} <br/>
                   <span className="text-primary italic text-3xl sm:text-4xl lg:text-6xl">{slide.subtitle}</span>
@@ -209,14 +220,12 @@ const SignIn = () => {
           </div>
         ))}
 
-        {/* Logo - only visible on desktop */}
         <div className="hidden lg:flex absolute top-10 left-10 z-30">
           <Link to="/" className="font-heading text-3xl font-bold text-white tracking-widest flex items-center gap-2 hover:text-primary transition-colors">
-            LLM <span className="text-primary italic">Showroom</span>
+            LM <span className="text-primary italic">Showroom</span>
           </Link>
         </div>
 
-        {/* Slide dots */}
         <div className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-1.5 sm:gap-2">
           {heroSlides.map((_, idx) => (
             <button 
@@ -228,14 +237,11 @@ const SignIn = () => {
         </div>
       </div>
 
-      {/* 🔥 FIXED: Form section - now works with column layout on mobile */}
       <div className="w-full lg:w-1/2 flex flex-col justify-center px-5 sm:px-10 md:px-14 lg:px-20 py-8 lg:py-12 relative">
-        {/* Back to Home - mobile only */}
         <Link to="/" className="lg:hidden absolute top-4 left-4 sm:top-8 sm:left-8 text-stone-500 hover:text-primary flex items-center gap-2 font-body text-xs sm:text-sm transition-colors">
           <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />Back to Home
         </Link>
         
-        {/* Logo - mobile only */}
         <div className="lg:hidden text-center mb-6 sm:mb-8">
           <Link to="/" className="font-heading text-2xl sm:text-3xl font-bold text-stone-800 tracking-widest">
             LLM <span className="text-primary italic">Showroom</span>
@@ -243,7 +249,6 @@ const SignIn = () => {
         </div>
 
         <div className="max-w-md w-full mx-auto">
-          {/* Header */}
           <div className="mb-5 sm:mb-6">
             <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
@@ -253,7 +258,6 @@ const SignIn = () => {
             <p className="font-body text-stone-500 text-xs sm:text-sm">Sign in to unlock exclusive offers & rewards.</p>
           </div>
 
-          {/* Benefits */}
           <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-5 sm:mb-6">
             {benefits.map((benefit, idx) => (
               <div key={idx} className="flex items-center gap-1 bg-stone-100 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full">
@@ -264,7 +268,6 @@ const SignIn = () => {
           </div>
 
           <form onSubmit={handleLogin} className="space-y-3.5 sm:space-y-4">
-            {/* Email/Phone Input */}
             <div className="space-y-1 sm:space-y-1.5">
               <label className="font-body text-xs sm:text-sm font-medium text-stone-700 flex items-center gap-1.5 sm:gap-2">
                 {isEmail ? <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-stone-400" /> : isPhone ? <Smartphone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500" /> : <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-stone-400" />}
@@ -288,7 +291,6 @@ const SignIn = () => {
               {isPhone && <p className="text-[9px] sm:text-[10px] text-stone-400 mt-0.5 sm:mt-1">We'll send you a 6-digit OTP</p>}
             </div>
 
-            {/* Password Field (Email only) */}
             {isEmail && (
               <div className="space-y-1 sm:space-y-1.5">
                 <div className="flex justify-between items-end">
@@ -322,7 +324,6 @@ const SignIn = () => {
               </div>
             )}
 
-            {/* OTP Section (Phone only) */}
             {isPhone && otpSent && (
               <div className="space-y-1.5 sm:space-y-2">
                 <div className="flex items-center justify-between">
@@ -361,7 +362,6 @@ const SignIn = () => {
               </div>
             )}
 
-            {/* Remember Me */}
             {(isEmail || isPhone) && (
               <div className="flex items-center justify-between pt-0.5 sm:pt-1">
                 <label className="flex items-center gap-1.5 sm:gap-2 cursor-pointer group">
@@ -378,7 +378,6 @@ const SignIn = () => {
               </div>
             )}
 
-            {/* Error/Success Messages */}
             {errorMsg && (
               <div className="flex items-center gap-1.5 sm:gap-2 bg-red-50 border border-red-200 rounded-xl p-2.5 sm:p-3">
                 <AlertCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-500 flex-shrink-0" />
@@ -392,7 +391,6 @@ const SignIn = () => {
               </div>
             )}
 
-            {/* Submit Button */}
             <button 
               type="submit" 
               disabled={isLoading} 
@@ -422,17 +420,15 @@ const SignIn = () => {
             </button>
           </form>
 
-          {/* Register Link */}
           <div className="mt-5 sm:mt-6 text-center">
             <p className="font-body text-xs sm:text-sm text-stone-500">
-              New to LLM Showroom? 
+              New to LM Showroom? 
               <Link to="/register" className="text-primary font-medium hover:text-primary/80 transition-colors ml-1.5 sm:ml-2 border-b-2 border-primary/30 hover:border-primary pb-0.5">
                 Create Account
               </Link>
             </p>
           </div>
 
-          {/* Footer Links */}
           <div className="mt-5 sm:mt-6 flex items-center justify-center gap-3 sm:gap-4 text-[10px] sm:text-xs text-stone-400">
             <Link to="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
             <span className="w-1 h-1 bg-stone-300 rounded-full"></span>

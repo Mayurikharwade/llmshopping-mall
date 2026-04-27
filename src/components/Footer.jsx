@@ -95,7 +95,7 @@ const Footer = () => (
       </div>
       
       <div className="border-t border-primary-foreground/10 pt-6 text-center text-xs text-primary-foreground/50">
-        © 2026 LM Showroom (LLM Shop). All rights reserved.
+        © 2026 LM Showroom (LM Shop). All rights reserved.
       </div>
     </div>
   </footer>

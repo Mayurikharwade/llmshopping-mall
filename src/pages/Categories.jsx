@@ -6,7 +6,7 @@ const categoriesData = [
   { 
     name: "Premium Sarees", 
     desc: "Kanchipuram, Banarasi & Handlooms", 
-    link: "/sarees", 
+    link: "/sarees?category=Silk",  // ✅ Added category filter
     image: "https://i.pinimg.com/736x/83/1f/43/831f433bbb3ba100d1b6e50483e2c107.jpg",
     tag: "Bestseller",
     rating: 4.9,
@@ -16,7 +16,7 @@ const categoriesData = [
   { 
     name: "Unstitched Fabrics", 
     desc: "Ikat, Kalamkari & Block Prints", 
-    link: "/fabrics", 
+    link: "/fabrics?category=Kalamkari",  // ✅ Added category filter
     image: "https://i.pinimg.com/1200x/30/72/65/3072656816eed46a1df787164dfcea0b.jpg",
     tag: "Trending",
     rating: 4.8,
@@ -26,7 +26,7 @@ const categoriesData = [
   { 
     name: "Elegant Kurtas", 
     desc: "Straight Cut, Anarkali & Sets", 
-    link: "/kurtas", 
+    link: "/kurtas?category=Anarkali",  // ✅ Added category filter
     image: "https://i.pinimg.com/1200x/f4/b0/5a/f4b05a82d38a8d5c211319d3396ae64e.jpg",
     tag: "Popular",
     rating: 4.7,
@@ -36,7 +36,7 @@ const categoriesData = [
   { 
     name: "Handcrafted Dupattas", 
     desc: "Silk, Organza & Embroidered", 
-    link: "/dupattas", 
+    link: "/dupattas?category=Silk",  // ✅ Added category filter
     image: "https://i.pinimg.com/736x/2d/46/2d/2d462d19e2e86ff6f12ba387b24afc12.jpg",
     tag: "Limited",
     rating: 4.9,
@@ -82,7 +82,7 @@ const Categories = () => {
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-stone-50 to-white">
       
-      {/* FEATURED COLLECTIONS - Premium Luxury Design */}
+      {/* FEATURED COLLECTIONS */}
       <div className="container mx-auto px-4 pt-10 pb-4">
         <div className="flex items-center justify-between mb-5">
           <div>
@@ -144,7 +144,7 @@ const Categories = () => {
         </div>
       </div>
 
-      {/* TRENDING NOW - Reduced gap above */}
+      {/* TRENDING NOW */}
       <div className="bg-gradient-to-b from-white to-stone-50 py-8">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-4">
@@ -194,7 +194,7 @@ const Categories = () => {
       {/* WHY SHOP WITH US */}
       <div className="bg-gradient-to-r from-stone-100 to-stone-50 py-8">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-6"><h3 className="font-heading text-2xl text-stone-800">The LLM Experience</h3><p className="text-stone-600 mt-2">Crafting elegance since 2024</p></div>
+          <div className="text-center mb-6"><h3 className="font-heading text-2xl text-stone-800">The LM Experience</h3><p className="text-stone-600 mt-2">Crafting elegance since 2024</p></div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
             {[
               { icon: Gem, title: "Premium Quality", desc: "Handpicked fabrics & craftsmanship" },

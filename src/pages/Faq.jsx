@@ -322,7 +322,7 @@ const Faq = () => {
         {/* ======================================================= */}
         {/* CONTACT SUPPORT BANNER */}
         {/* ======================================================= */}
-        <div className="mt-16">
+        <div className="mt-8">
           <div className="bg-gradient-to-r from-primary/5 via-amber-500/5 to-primary/5 rounded-3xl p-8 md:p-12 border border-stone-100">
             <div className="max-w-3xl mx-auto text-center">
               <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm mb-6">
@@ -384,46 +384,7 @@ const Faq = () => {
         {/* ======================================================= */}
         {/* QUICK LINKS */}
         {/* ======================================================= */}
-        <div className="mt-12 pt-8 border-t border-stone-200">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div>
-              <h4 className="font-semibold text-stone-800 mb-3">Shop</h4>
-              <ul className="space-y-2">
-                <li><Link to="/sarees" className="text-sm text-stone-500 hover:text-primary transition">Sarees</Link></li>
-                <li><Link to="/kurtas" className="text-sm text-stone-500 hover:text-primary transition">Kurtas</Link></li>
-                <li><Link to="/fabrics" className="text-sm text-stone-500 hover:text-primary transition">Fabrics</Link></li>
-                <li><Link to="/dupattas" className="text-sm text-stone-500 hover:text-primary transition">Dupattas</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-stone-800 mb-3">Support</h4>
-              <ul className="space-y-2">
-                <li><Link to="/track-order" className="text-sm text-stone-500 hover:text-primary transition">Track Order</Link></li>
-                <li><Link to="/shipping" className="text-sm text-stone-500 hover:text-primary transition">Shipping Info</Link></li>
-                <li><Link to="/returns" className="text-sm text-stone-500 hover:text-primary transition">Returns Policy</Link></li>
-                <li><Link to="/size-guide" className="text-sm text-stone-500 hover:text-primary transition">Size Guide</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-stone-800 mb-3">Company</h4>
-              <ul className="space-y-2">
-                <li><Link to="/about" className="text-sm text-stone-500 hover:text-primary transition">About Us</Link></li>
-                <li><Link to="/contact" className="text-sm text-stone-500 hover:text-primary transition">Contact</Link></li>
-                <li><Link to="/blog" className="text-sm text-stone-500 hover:text-primary transition">Blog</Link></li>
-                <li><Link to="/careers" className="text-sm text-stone-500 hover:text-primary transition">Careers</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-stone-800 mb-3">Legal</h4>
-              <ul className="space-y-2">
-                <li><Link to="/privacy" className="text-sm text-stone-500 hover:text-primary transition">Privacy Policy</Link></li>
-                <li><Link to="/terms" className="text-sm text-stone-500 hover:text-primary transition">Terms of Service</Link></li>
-                <li><Link to="/cookie" className="text-sm text-stone-500 hover:text-primary transition">Cookie Policy</Link></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
+       
       </div>
     </div>
   );

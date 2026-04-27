@@ -105,7 +105,7 @@ const FeaturedBanner = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
           {/* Large Left Image */}
-          <Link to="/shop" className="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-1 md:row-span-2">
+          <Link to="/sarees?category=Wedding" className="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-1 md:row-span-2">
             <img 
               src="https://i.pinimg.com/1200x/82/c4/f0/82c4f0f26402d7af616a4cee263cde1e.jpg" 
               alt="Bridal Collection" 
@@ -125,8 +125,8 @@ const FeaturedBanner = () => {
             </div>
           </Link>
 
-          {/* Top Right Image */}
-          <Link to="/shop" className="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-1">
+          {/* ✅ FIX 1: Top Right Image - Festival Edit */}
+          <Link to="/sarees?category=Festival" className="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-1">
             <img 
               src="https://i.pinimg.com/1200x/54/e4/33/54e4336396452e56f7a87b20be965ec0.jpg" 
               alt="Festival Edit" 
@@ -146,8 +146,8 @@ const FeaturedBanner = () => {
             </div>
           </Link>
 
-          {/* Bottom Right Image */}
-          <Link to="/shop" className="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-1">
+          {/* ✅ FIX 2: Bottom Right Image - Luxury Accessories */}
+          <Link to="/dupattas?category=Party" className="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-1">
             <img 
               src="https://i.pinimg.com/1200x/8e/06/8a/8e068a9780d7be4bb4e6405f0f92c9ce.jpg" 
               alt="Luxury Accessories" 
@@ -169,7 +169,7 @@ const FeaturedBanner = () => {
         </div>
       </div>
 
-      {/* SHOP BY OCCASION - Image Strips */}
+      {/* ✅ FIX 3: SHOP BY OCCASION - With category parameters */}
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-5">
           <div>
@@ -187,7 +187,7 @@ const FeaturedBanner = () => {
             { name: "Party", image: "https://i.pinimg.com/736x/ec/5b/69/ec5b691dcfd7cff36f8afe213f1a14f2.jpg", items: 189 },
             { name: "Reception", image: "https://i.pinimg.com/736x/25/3f/6a/253f6ac03f122a0b17330c545f4524fc.jpg", items: 112 },
           ].map((occasion, idx) => (
-            <Link key={idx} to="/shop" className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1 aspect-[3/4]">
+            <Link key={idx} to={`/sarees?category=${occasion.name}`} className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1 aspect-[3/4]">
               <img src={occasion.image} alt={occasion.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-4">

@@ -37,7 +37,7 @@ const TrackOrder = () => {
     setTimeout(() => {
       setLoading(false);
       const orderResult = {
-        orderId: orderId.toUpperCase() || `LLM${Math.floor(100000 + Math.random() * 900000)}`,
+        orderId: orderId.toUpperCase() || `LM${Math.floor(100000 + Math.random() * 900000)}`,
         status: "In Transit",
         expectedDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString('en-IN', { 
           year: 'numeric', month: 'long', day: 'numeric' 
@@ -207,7 +207,7 @@ const TrackOrder = () => {
                     type="text"
                     value={orderId}
                     onChange={(e) => setOrderId(e.target.value)}
-                    placeholder="e.g. LLM123456"
+                    placeholder="e.g. LM123456"
                     required
                     className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3.5 font-body text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                   />
@@ -284,7 +284,7 @@ const TrackOrder = () => {
                 <div className="mt-6 p-4 bg-stone-50 rounded-xl">
                   <p className="text-xs text-stone-500 mb-2">Try these demo orders:</p>
                   <div className="flex flex-wrap gap-2 justify-center">
-                    {['LLM123456', 'LLM789012', 'LLM345678'].map((id) => (
+                    {['LM123456', 'LM789012', 'LM345678'].map((id) => (
                       <button
                         key={id}
                         onClick={() => quickTrackOrder(id)}

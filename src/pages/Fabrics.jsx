@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // ✅ Added useLocation
 import { 
   Filter, Heart, ShoppingCart, Star, Eye, ChevronDown, 
   Truck, Shield, Zap, Search,
@@ -29,6 +29,7 @@ const filterSections = {
 const sortOptions = ["Featured", "Newest", "Price: Low to High", "Price: High to Low", "Top Rated"];
 
 const Fabrics = () => {
+  const location = useLocation(); // ✅ Added useLocation
   const [sortBy, setSortBy] = useState("Featured");
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [showMobileFilter, setShowMobileFilter] = useState(false);
@@ -42,6 +43,22 @@ const Fabrics = () => {
   const [selectedFilters, setSelectedFilters] = useState({});
 
   const { addToCart, toggleWishlist, wishlist, cart } = useShop();
+
+  // ✅ READ URL PARAMETER FOR CATEGORY FILTER
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const categoryParam = params.get("category");
+    
+    if (categoryParam) {
+      console.log("Category from URL:", categoryParam);
+      // Auto-select the category filter
+      setExpandedSections(prev => ({ ...prev, "Category": true }));
+      setSelectedFilters(prev => ({
+        ...prev,
+        "Category": [categoryParam]
+      }));
+    }
+  }, [location.search]);
 
   useEffect(() => {
     const stored = localStorage.getItem("llmshop_recently_viewed");
