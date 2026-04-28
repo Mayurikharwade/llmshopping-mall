@@ -26,7 +26,7 @@ const Cart = () => {
   const total = subtotal + shipping - discount;
 
   const applyCoupon = () => {
-    if (couponCode.toUpperCase() === "LLM10") {
+    if (couponCode.toUpperCase() === "LM10") {
       setDiscount(Math.round(subtotal * 0.1));
       setCouponApplied(true);
     } else if (couponCode.toUpperCase() === "WELCOME20" && subtotal >= 1999) {
@@ -281,7 +281,7 @@ const Cart = () => {
                   </button>
                 </div>
                 <p className="text-stone-400 text-[10px] mt-2">
-                  Try: LLM10 (10% off) or WELCOME20 (20% off on orders above ₹1,999)
+                  Try: LM10 (10% off) or WELCOME20 (20% off on orders above ₹1,999)
                 </p>
               </div>
 
